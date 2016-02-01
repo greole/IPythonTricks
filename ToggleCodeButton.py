@@ -1,4 +1,5 @@
 from IPython.display import HTML
+from future.builtins import *
 
 class NotebookObject():
 
@@ -52,7 +53,7 @@ class DictTable(dict):
             else:
                 html.append("<th>{}</th>".format(self.name))
             html.append("</tr>")
-        for key, value in self.d.iteritems():
+        for key, value in self.d.items():
             html.append("<tr>")
             html.append("<td>{0}</td>".format(key))
             if isinstance(value, list):
@@ -65,7 +66,7 @@ class DictTable(dict):
         return ''.join(html)
 
 def below(*pargs):
-    """ takes n html renderable objects and places 
+    """ takes n html renderable objects and places
         them below each other """
     return HTML(' '.join([_._repr_html_() for _ in pargs]))
 
@@ -83,20 +84,20 @@ class DictValueTable(dict):
 
     def __init__(self, d):
         self.d = d
-        self.vals = {key: value['val'] for key, value in d.iteritems()}
+        self.vals = {key: value['val'] for key, value in d.items()}
 
     def __getattr__(self, item):
         return self.d[item]['val']
 
     def set(self, item, value):
-        d = {k: v for k, v in self.d.iteritems()}
+        d = {k: v for k, v in self.d.items()}
         i = {'val': value, 'label': self.d[item]['label']}
         d[item] = i
         return DictValueTable(d)
 
     def _repr_html_(self):
         html = ["<table >"]
-        for key, subdict in self.d.iteritems():
+        for key, subdict in self.d.items():
             dis = subdict['label']
             val = subdict['val']
             html.append("<tr>")
