@@ -58,9 +58,9 @@ class DictTable(dict):
             html.append("<td>{0}</td>".format(key))
             if isinstance(value, list):
                 for v in value:
-                    html.append("<td>{:.4}</td>".format(v))
+                    html.append("<td>{}</td>".format(v))
             else:
-                html.append("<td>{:.4}</td>".format(value))
+                html.append("<td>{}</td>".format(value))
             html.append("</tr>")
         html.append("</table>")
         return ''.join(html)
